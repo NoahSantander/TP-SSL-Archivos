@@ -16,5 +16,12 @@ int main(int argc, char *argv[])
         }
         fclose(binario);
     }
+    for(int i = 1; i < argc - 1; i += 2)
+    {
+        binario = fopen(argv[i], "rb");
+        texto = fopen(argv[i+1], "w");
+        fclose(binario);
+        fclose(texto);
+    }
     return 0;
 }
