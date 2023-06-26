@@ -7,16 +7,21 @@ int main(int argc, char *argv[])
         printf("La cantidad de archivos es insuficiente.");
         return 0;
     }
-    for(int i = 1; i < sizeof(argv) - 1; i += 2)
+    for(int i = 1; i < argc - 1; i += 2)
     {
-        printf("%d", i);
+        if(!(binario = fopen(argv[i], "rb")))
+        {
+            printf("Eror al intentar abrir el archivo binario, compruebe que exista.");
+            return 0;
+        }
+        fclose(binario);
     }
-    binario = fopen("miBinario", "rb");
-    texto = fopen("miTexto.txt", "w");
-    char buff[100];
-    fread(buff, 2, 1, binario);
-    fprintf(texto, "%s", buff);
-    fclose(binario);
-    fclose(texto);
+    for(int i = 1; i < argc - 1; i += 2)
+    {
+        binario = fopen(argv[i], "rb");
+        texto = fopen(argv[i+1], "w");
+        fclose(binario);
+        fclose(texto);
+    }
     return 0;
 }
