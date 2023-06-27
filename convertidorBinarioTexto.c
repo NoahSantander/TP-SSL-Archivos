@@ -1,6 +1,7 @@
 #include <stdio.h>
 int main(int argc, char *argv[])
 {
+    char buff[100];
     FILE *binario, *texto;
      if((argc < 3) || !(argc%2))
     {
@@ -20,6 +21,10 @@ int main(int argc, char *argv[])
     {
         binario = fopen(argv[i], "rb");
         texto = fopen(argv[i+1], "w");
+        while(fread(buff, sizeof(char), 1, binario))
+        {
+            fwrite(buff, sizeof(char), 1,texto);
+        }
         fclose(binario);
         fclose(texto);
     }
